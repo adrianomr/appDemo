@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mysqlsrv:
+    image: mysql:5.5
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "demo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/adriano/desenvolvimento/docker/volumes/mysql:/var/lib/mysql
+
+  spring-boot-containers:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqlsrv
